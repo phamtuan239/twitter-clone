@@ -1,0 +1,58 @@
+<%- include('../layout/header') -%>
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/user.css">
+<link rel="stylesheet" href="/css/post.css">
+<link rel="stylesheet" href="/css/responsive_web.css">
+<body data-authenticate-user=<%= isUser %>>      
+<% let displayName = profile.firstName + ' ' + profile.lastName %>        
+<% if(isUser) {%>
+    <%- include('../layout/upload') -%>
+    <%- include('../layout/editor') -%>           
+    <%- include('../layout/deletepostmodal') -%>           
+    <% } %>
+<div class="container">
+    <div class="row">
+        <%- include('../layout/navbar') -%>
+        <div data-parent-profile=<%= profile.username %> 
+            class="mainSectionContainer col-lg-6 col-10 p-0">
+            <div class="titleContainer fixed-top">
+                <span class="userProfile">
+                    <div class="backButtonContainer p-1">
+                        <button>
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                      </div>
+                    <div class="infoUserContainer">
+                        <h1><%= displayName %></h1>
+                        <p data-tweets="<%= profile.username %>"><%= posts.length + ' Tweets' %> </p>
+                    </div>  
+                </span>
+                <% if(!isUser) {%>
+                <form class="formUserProfile">
+                    <button
+                    data-following="<%= isFollowing %>"  
+                    data-follow-username="<%= profile.username %>"
+                    type="submit" 
+                    class="btn btn-primary btnFollowProfile"><%= isFollowing ? "Following" : "Follow" %></button></button>
+                </form>
+                <% } %>
+            </div>
+            <%- include('./userform') -%>
+            <% if(isUser) {%>
+            <%- include('../layout/postform') -%> 
+            <% } %> 
+            <%- include('../layout/post') -%>
+        </div>
+        <div class="col-lg-4 third-col">
+            <%- include('../layout/search') -%>
+        </div>
+    </div>
+</div>
+<%- include('../layout/footer') -%>
+<script src="/js/common.js"></script>
+<script src="/js/post.js"></script>
+<script src="/js/editor.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/user.js"></script>
+</body>
+</html>

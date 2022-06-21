@@ -1,0 +1,36 @@
+<div id="postFormContainer" class="py-3 px-2 mb-2">
+  <div class="postAvatar">
+    <a href="<%= `/user-page/${user.username}` %> ">
+      <image
+        data-avatar="<%= 'img' + user._id + 'png' %>"
+        class="rounded-circle"
+        src="<%= getAvatar(user.avatar) %> "
+        alt="avatar"
+        width="50"
+        height="50"
+        title="<%= user.username %>"
+      ></image>
+    </a>
+  </div>
+  <form class="mx-1 postFormContent">
+    <div class="mb-1">
+      <textarea
+        id="postTextarea"
+        class="form-control"
+        placeholder="What's happening?"
+        shadow-none
+      ></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary" id="postButton" disabled>
+      Tweet
+    </button>
+    <div class="toolContainer">
+      <button id="emojiButton" title="emoji">
+        <i class="far fa-laugh-beam"></i>
+      </button>
+      <button id="editButton" title="edit">
+        <i class="fas fa-edit"></i>
+      </button>
+    </div>
+  </form>
+</div>

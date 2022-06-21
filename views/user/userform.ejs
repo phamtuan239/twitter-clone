@@ -1,0 +1,60 @@
+<% let displayName = profile.firstName + ' ' + profile.lastName %>  
+<div id="profileContainer" class="pt-3 px-2 mb-2">
+  <div class="backgroundProfile">
+    <img data-background=<%= `img${profile._id}png`%>
+     src="<%= getBackground(profile.background) %> " 
+     alt="background" />
+    <% if(isUser) {%>
+    <div class="uploadBackgroundContainer">
+      <button class="uploadButton" title="upload background" value="background">
+        <i class="fas fa-camera"></i>
+      </button>
+    </div>
+    <% } %>
+  </div>
+  <div class="avatarProfile">
+    <div class="avatarProfileContainer">
+      <img
+        data-avatar="<%= 'img' + profile._id + 'png' %>"
+        class="rounded-circle"
+        src="<%= getAvatar(profile.avatar) %>"
+        alt="avatar"
+        title="<%= profile.username %>"
+      />
+      <% if(isUser) {%>
+      <div class="uploadAvatarContainer">
+      <button class="uploadButton" title="upload avatar" value="avatar">
+        <i class="fas fa-camera"></i>
+      </button>
+    </div>
+    <% } %>
+    </div>
+    <% if(!isUser) {%>
+    <form class="formFollowProfile">
+      <button
+        data-following="<%= isFollowing %>"  
+        data-follow-username="<%= profile.username %>"
+        type="submit" 
+        class="btn btn-primary btnFollowProfile"><%= isFollowing ? "Following" : "Follow" %></button> </button>
+    </form>
+    <% } %>
+  </div>
+  <div class="detailProfileContainer">
+    <h4><%= displayName %></h4>
+    <p>@<%= profile.username %></p>
+    <div class="followDetail">
+      <span>
+        <h6><%= profile.following.length %> </h6>
+        <p>Following</p>
+      </span>
+      <span>
+        <h6><%= profile.follower.length %> </h6>
+        <% if(profile.follower.length > 1){ %>
+          <p>Followers</p>
+          <% } else {%>
+            <p>Follower</p>
+        <% } %>    
+      </span>
+    </div>
+  </div>
+</div>

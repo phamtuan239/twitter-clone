@@ -1,0 +1,56 @@
+<%- include('../layout/header') -%>
+<link rel="stylesheet" href="/css/login.css">
+</header>
+<body>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-lg-5 mx-auto bg-light p-4">
+      <% if(alert) {%>
+        <div class="alert alert-success" role="alert">
+          <p class="m-0">We send a token to verify your email.</p>
+          <p class="m-0">Please check <a href="https://mail.google.com/">your email</a> from minggu.</p>
+          <p class="m-0">(Check spam if not find email)</p>
+          <p class="m-0">Note: Token available in 24 hours.</p>
+        </div>
+        <% } %>  
+      <h1 class="text-center">Login</h1>
+      <form method="post" action="/login">
+        <% for(let i = 0; i < forms.length; i++) {%>
+          <% let {name, type, placeholder} = forms[i]; %>
+          <div class="<%= `${errors && errors[name] ? 'mb-1' : 'mb-3'}`%>">
+            <input
+              type="<%= type %>"
+              class="<%= `form-control ${errors && errors[name] ? 'is-invalid' : ''}` %>"
+              placeholder="<%= placeholder %>" 
+              name="<%= name %>" 
+              value="<%= `${input && input[name] ? input[name] : ''}` %>"
+            />
+            <% if(errors && errors[name]) { %>
+              <p class='text-danger mb-0'><%= errors[name] %> </p>
+              <% } %> 
+          </div>
+          <% } %>
+        <div class="d-grid gap-2">
+          <button id="btnLogin" class="btn btn-DeepSkyBlue btn-block" type="submit">Login</button>
+        </div>
+        <div class="text-center mt-2">
+          <a href="forgot-password" class="link-primary">Forgot your password?</a>
+        </div>
+        <div class="text-center mt-2">
+          <a href="register" class="link-primary">Need an account? Register here</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<%- include('../layout/footer') -%>
+<script>
+  const btn = $('#btnLogin');
+  btn.click(function(e) {
+    setTimeout(function() {
+      btn.prop("disabled", true);
+    }, 10)
+  })
+</script>
+</body>
+</html>

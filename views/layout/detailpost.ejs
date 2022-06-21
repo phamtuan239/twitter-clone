@@ -1,0 +1,91 @@
+<div class="px-0" id="postContainer">
+  <% const { postedBy, content, time, isUpload } = post %> <% const displayName =
+  postedBy.firstName + " " + postedBy.lastName; %>
+  <% let liked = post.likes.includes(user._id) %>
+  <div class="post p-2" data-post-id="<%= post._id %>">
+    <div class="mainContentContainer">
+      <div class="postContentContainer mx-2">
+        <div class="header">
+          <div class="userImageContainer">
+            <a href="<%= `/user-profile/${postedBy.username}` %>">
+              <img
+                data-avatar="<%= 'img' + postedBy._id + 'png' %>"
+                class="rounded-circle"
+                alt="avatar"
+                width="40"
+                height="40"
+                src="<%= getAvatar(postedBy.avatar) %>"
+                title="<%= postedBy.username %>"
+              />
+            </a>
+          </div>
+          <div class="userInfo">
+            <a
+              href="<%= `/user-page/${postedBy.username}` %>"
+              class="displayName"
+              ><%= displayName %></a
+            >
+            <span class="username">@<%= postedBy.username %></span> |
+            <span class="date"><%= time %></span>
+          </div>
+          <% if(isUser) {%>
+          <div class="userFunction">
+            <% if(!isUpload) {%>
+              <button
+                class="btnUpdateFunction"
+                title="Update"
+                data-update-id="<%= `${post._id}` %>"
+              >
+                <i class="fas fa-pen-square"></i>
+              </button>
+              <%}%>
+            <button
+              class="btnDeleteFunction"
+              title="Delete"
+              data-toggle="modal"
+              data-target="#deleteModal"
+              data-delete-id="<%= `${post._id}` %>"
+            >
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+          <% } %>
+        </div>
+        <div class="postBody">
+          <span data-post-span-id="<%= post._id %>"><%- content %></span>
+        </div>
+        <div class="postFooter">
+          <div class="postButtonContainer p-1">
+            <div class="commentContainer">
+              <button>
+                <i class="far fa-comment"></i>
+              </button>
+            </div>
+          </div>
+          <div class="postButtonContainer p-1">
+            <div class="retweetContainer">
+              <button>
+                <i class="fas fa-retweet"></i>
+              </button>  
+            </div>
+          </div>
+          <div class="postButtonContainer p-1">
+            <div class="<%=`likeContainer ${liked ? 'liked' : ''}`%>">
+              <% if(liked) {%>
+              <button>
+                <i class="fas fa-heart"></i>
+              </button>
+              <%}else {%>
+              <button>
+                <i class="far fa-heart"></i>
+              </button>
+              <%}%> <% if(post.likes.length > 0) {%>
+              <div class="amountLike"><%= post.likes.length %></div>
+              <%}%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<%- include('../layout/header') -%>
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/post.css">
+<link rel="stylesheet" href="/css/responsive_web.css">
+<body data-authenticate-user=<%= isUser %>>
+<%- include('../layout/upload') -%>    
+<%- include('../layout/editor') -%>
+<!-- <div class="back-to-top" title="Back to Top">
+    <i class="fas fa-dove"></i>
+</div>     -->
+<div class="container">
+    <div class="row">
+        <%- include('../layout/navbar') -%>
+        <div data-parent-profile="main"
+             class="mainSectionContainer col-lg-6 col-10 p-0">
+            <div class="titleContainer fixed-top">
+                <h1><%= title %> </h1>
+            </div>
+            <%- include('../layout/postform') -%>
+            <%- include('../layout/post') -%>
+        </div>
+        <div class="col-lg-4 third-col">
+            <%- include('../layout/search') -%>
+            <%- include('../layout/follow') -%>
+        </div>
+    </div>
+</div>
+<%- include('../layout/footer') -%>
+<script src="/js/common.js"></script>
+<script src="/js/post.js"></script>
+<script src="/js/editor.js"></script>
+<script src="/js/search.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+
+<nav class="col-2 fixed-top" data-user=<%= user._id %>>
+    <a href="/" title="Twitter">
+        <i class="<%= 'fas fa-dove' + (title === 'Twitter' ? ' blue' : '') %>"></i>
+    </a>
+    <a href=<%= `/user-page/${user.username}` %>  title="Home">
+        <i class="<%= 'fas fa-home' + (title === 'User Page' && isUser ? ' blue' : '') %>">
+        </i></a>
+    <a href="" title="Search" id="search"><i class="fas fa-search"></i></a>
+    <a href=<%= `/nofication/${user.username}` %> title="Nofication" id="noficationContainer">
+        <p id="noficationAmount" data-nofication-id="<%= user._id %>">
+            <%= noficationAmount %> 
+        </p>
+        <i class="<%= 'fas fa-bell' + (title === 'Nofication' ? ' blue' : '') %>"></i>
+    </a>
+    <a href="#" title="Message"><i class="fas fa-paper-plane"></i></a>
+    <a href="#" title="Profile"><i class="fas fa-user"></i></a>
+    <a href="#" title="Explore"><i class="fas fa-globe"></i></a>
+    <a href="/logout" title="Logout"><i class="fas fa-sign-out-alt"></i></a>
+</nav>
